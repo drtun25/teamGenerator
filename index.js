@@ -1,10 +1,11 @@
-// const Employee = require('./lib/employee');
-// const Engineer = require('./lib/engineer');
-// const Intern = require('./lib/intern');
-// const Manager = require('./lib/manager');
+const Employee = require('./lib/employee');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
+const Manager = require('./lib/manager');
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+function buildTeam() {
 
 inquirer.prompt([
     //manager questions
@@ -86,4 +87,73 @@ inquirer.prompt([
     }, 
      
     
-]).then
+]).then ((response) =>{
+    fs.writeFile('team.html', `
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>My Team</h1>
+        </div>
+    </div>
+
+    <div class="card-employee">
+        <div>
+            <h2>${Manager.getName()}</h2>
+            <h3>${Manager.getRole()}</h3>
+        </div>
+        <div>
+            <ul>
+                <li>${Manager.getId()}</li>
+                <li>${Manager.getEmail()}</li>
+                <li>${Manager.getOfficeNumber()}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-employee">
+        <div>
+            <h2>${Engineer.getName()}</h2>
+            <h3>${Engineer.getRole()}</h3>
+        </div>
+        <div>
+            <ul>
+                <li>${Engineer.getId()}</li>
+                <li>${Engineer.getEmail()}</li>
+                <li>${Engineer.getOfficeNumber()}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-employee">
+        <div>
+            <h2>${Intern.getName()}</h2>
+            <h3>${Intern.getRole()}</h3>
+        </div>
+        <div>
+            <ul>
+                <li>${Intern.getId()}</li>
+                <li>${Intern.getEmail()}</li>
+                <li>${Intern.getOfficeNumber()}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+    
+
+    `)
+})
+
+}
+
+buildTeam();
