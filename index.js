@@ -1,9 +1,9 @@
-const Employee = require('./lib/employee');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
 const fs = require('fs');
 const inquirer = require('inquirer');
+const path = require('path');
 
 function buildTeam() {
 
@@ -151,7 +151,11 @@ inquirer.prompt([
 </html>
     
 
-    `)
+    `, function(err) {
+        if (err) {
+            return console.log(err);
+        }
+    })
 })
 
 }
